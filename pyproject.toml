@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raglens"
+version = "0.1.0"
+description = "Drop-in explainability and auto-documentation for your RAG pipeline — no framework lock-in."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "RAGLens contributors" }]
+keywords = ["rag", "llm", "explainability", "observability", "attribution", "documentation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# v1 is intentionally dependency-free (stdlib only) to honor NFR1.2 (portability)
+# and NFR1.3 (local-first). Optional integrations live under [project.optional-dependencies].
+dependencies = []
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.18"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+raglens = "raglens.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/raglens/raglens"
+Documentation = "https://github.com/raglens/raglens#readme"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["raglens*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
